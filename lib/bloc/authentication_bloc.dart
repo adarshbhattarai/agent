@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:logger/logger.dart';
+import 'package:myapp/logger/log_printer.dart';
 
 import '../services/authentication.dart';
 import '../user/user.dart';
@@ -10,6 +12,8 @@ part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {
   final AuthService authService = AuthService();
+   final logger = Logger(printer: SimpleLogPrinter('AuthenticationFlowScreen: '),
+  level: Level.all);
   
   AuthenticationBloc() : super(AuthenticationInitialState()) {
     on<AuthenticationEvent>((event, emit) {});
@@ -26,7 +30,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
         emit(const AuthenticationFailureState('create user failed'));
       }
       } catch (e) {
-        print(e.toString());
+        logger.e(e.toString());
       }
      emit(AuthenticationLoadingState(isLoading: false));
     });
@@ -36,8 +40,8 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       try {
         authService.signOutUser();
       } catch (e) {
-        print('error');
-        print(e.toString());
+        logger.i('error');
+        logger.e(e.toString());
       } 
        emit(AuthenticationLoadingState(isLoading: false));
      });

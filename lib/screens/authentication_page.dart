@@ -1,11 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:myapp/logger/log_printer.dart';
 import 'package:myapp/screens/home_screen.dart';
 import 'package:myapp/screens/sign_up.dart';
+import 'package:logger/logger.dart';
+
 
 class AuthenticationFlowScreen extends StatelessWidget {
-  const AuthenticationFlowScreen({super.key});
+
+  AuthenticationFlowScreen({super.key});
+  
   static String id = 'main screen';
+  // Create a logger instance
+  final logger = Logger(printer: SimpleLogPrinter('AuthenticationFlowScreen: '),
+  level: Level.all);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,8 +22,10 @@ class AuthenticationFlowScreen extends StatelessWidget {
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            logger.i("Entering Home Screen");
             return const HomeScreen();
           } else {
+            logger.i("Entering Sign Up Screen");
             return const SignupScreen();
           }
         },

@@ -1,15 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myapp/bloc/authentication_bloc.dart';
 import 'package:myapp/firebase_options.dart';
 import 'package:myapp/screens/authentication_page.dart';
+import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/sign_up.dart';
 
 void main() async{
 WidgetsFlutterBinding.ensureInitialized();
 await Firebase.initializeApp(
    options: DefaultFirebaseOptions.currentPlatform,
 );
-await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
+//await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   runApp(const MyAgent());
 }
 
@@ -19,15 +23,21 @@ class MyAgent extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    return MaterialApp(
+    return BlocProvider(create: (context) => AuthenticationBloc(),
+    child:  MaterialApp(
+      
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      home: const AuthenticationFlowScreen()
-    );
+      initialRoute: SignupScreen.id,
+      routes: {
+      SignupScreen.id: (context) => const SignupScreen(),
+      HomeScreen.id: (context) => const HomeScreen(),
+      },
+      //home:  AuthenticationFlowScreen()
+    ));    
   } 
 }
 

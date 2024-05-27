@@ -1,4 +1,5 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/screens/home_screen.dart';
@@ -17,9 +18,13 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+
+  // test@ethela.com
+  // pass :  pass123
   // Text Controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  String signedIn = "";
 
   @override
   void dispose() {
@@ -27,6 +32,33 @@ class _SignupScreenState extends State<SignupScreen> {
     passwordController.dispose();
     super.dispose();
   }
+
+  //login function?
+  Future<User?> loginUsingEmailPassword({required String email, required String password,
+  
+  required BuildContext context}) async {
+    FirebaseAuth auth= FirebaseAuth.instance;
+    User? user;
+    try {
+      print("Entering login");
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = userCredential.user!;
+       setState(() {
+        signedIn = "true";
+      });
+    } on FirebaseAuthException catch (e) {
+        if(e.code == "user-not-found"){
+          print("No user found for that email");
+        }else if(e.code == "wrong-password"){
+          print("Wrong password provided for that user");
+        } 
+      }
+    return user;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +82,9 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(height: 10),
             TextFormField(
               controller: emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.mail, color: Colors.black),
                 border: OutlineInputBorder(),
                 hintText: 'Enter your email',
               ),
@@ -60,8 +94,9 @@ class _SignupScreenState extends State<SignupScreen> {
             TextFormField(
               controller: passwordController,
               decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.lock, color: Colors.black),
                 border: OutlineInputBorder(),
-                hintText: 'Enter your password, okay',
+                hintText: 'Enter your password',
               ),
               obscureText: false,
             ),
@@ -75,7 +110,32 @@ class _SignupScreenState extends State<SignupScreen> {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10.0),
+            Text(signedIn != "" ? 'Signed In' : 'Email address'),
+            const SizedBox(height: 10),
+            // Container(
+            //   width: double.infinity,
+            //   child: RawMaterialButton(
+            //     fillColor: const Color.fromARGB(255, 47, 15, 97),
+            //     elevation: 0.0,
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(12.0)
+            //     ),
+            //     padding: const EdgeInsets.symmetric(vertical: 20.0),
+            //     onPressed: () async{
+            //       // let's test the app
+            //       User? user = await loginUsingEmailPassword(
+            //         email: emailController.text.trim(),
+            //         password: passwordController.text.trim(),
+            //         context: context,
+            //       );
+            //       print(user);
+
+            //     },
+            //     child: const Text("Login",
+            //     style: TextStyle(color: Colors.white, fontSize: 18.0)),
+            //   ),
+            // ),
             BlocConsumer<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
                 if (state is AuthenticationSuccessState) {

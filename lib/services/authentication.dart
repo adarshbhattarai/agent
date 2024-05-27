@@ -1,10 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:logger/logger.dart';
+import 'package:myapp/logger/log_printer.dart';
 import 'package:myapp/user/user.dart';
 
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
+  final logger = Logger(printer: SimpleLogPrinter('AuthenticationFlowScreen: '),
+     level: Level.all);
 
   /// create user
   Future<UserModel?> signUpUser(
@@ -26,7 +30,7 @@ class AuthService {
         );
       }
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
+      logger.e(e.toString());
     }
     return null;
   } 
@@ -60,7 +64,7 @@ class AuthService {
         );
       }
     } on FirebaseAuthException catch (e) {
-      print(e.toString());
+        logger.e(e.message);
     }
     return null;
   }
