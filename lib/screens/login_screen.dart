@@ -5,18 +5,18 @@ import 'package:myapp/screens/home_screen.dart';
 
 import '../bloc/authentication_bloc.dart';
 
-class SignupScreen extends StatefulWidget {
+class LoginScreen extends StatefulWidget {
   static String id = 'login_screen';
 
-  const SignupScreen({
+  const LoginScreen({
     super.key,
   });
 
   @override
-  State<SignupScreen> createState() => _SignupScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _SignupScreenState extends State<SignupScreen> {
+class _LoginScreenState extends State<LoginScreen> {
 
   // test@ethela.com
   // pass :  pass123
@@ -34,7 +34,7 @@ class _SignupScreenState extends State<SignupScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Create an account',
+          'Login to Your Account',
           style: TextStyle(
             color: Colors.deepPurple,
           ),
@@ -115,7 +115,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child:  Text(
                       state is AuthenticationLoadingState
                             ? '.......'
-                            : 'Register',
+                            : 'Login',
                       style: const TextStyle(
                         fontSize: 20,
                       ),
@@ -128,13 +128,11 @@ class _SignupScreenState extends State<SignupScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Already have an account? "),
+                const Text("Don't have an account? "),
                 GestureDetector(
-                  onTap: () {
-                   
-                  },
+                  onTap: () {},
                   child: const Text(
-                    'Login',
+                    'Register',
                     style: TextStyle(
                       color: Colors.deepPurple,
                     ),

@@ -43,7 +43,6 @@ class AuthService {
     }
   }
 
-
   ///signInUser 
    Future<UserModel?> signInUser(
     String email,

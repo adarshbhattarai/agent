@@ -18,4 +18,14 @@ class SignUpUser extends AuthenticationEvent {
 }
 
 
+class LoginUser extends AuthenticationEvent {
+  final String email;
+  final String password;
+
+  const LoginUser(this.email, this.password);
+
+  @override
+  List<Object> get props => [email, password];
+}
+
 class SignOut extends AuthenticationEvent {}

@@ -45,5 +45,22 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
       } 
        emit(AuthenticationLoadingState(isLoading: false));
      });
+
+     on<LoginUser>((event, emit) async {
+      emit(AuthenticationLoadingState(isLoading: true));
+      try {
+        final UserModel? user = await authService.signInUser(event.email,event.password);
+         if (user != null) {
+        emit(AuthenticationSuccessState(user));
+        
+      } else {
+        emit(const AuthenticationFailureState('Login user failed'));
+      }
+      } catch (e) {
+        logger.i('error');
+        logger.e(e.toString());
+      } 
+       emit(AuthenticationLoadingState(isLoading: false));
+     });
 }
 }
