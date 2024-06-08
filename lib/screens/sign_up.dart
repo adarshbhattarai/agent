@@ -6,7 +6,7 @@ import 'package:myapp/screens/home_screen.dart';
 import '../bloc/authentication_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
-  static String id = 'login_screen';
+  static String id = 'sign_up_screen';
 
   const SignupScreen({
     super.key,

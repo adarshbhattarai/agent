@@ -71,7 +71,15 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                print("Pressed on Hello World");
+                //  Navigator.pushNamedAndRemoveUntil(
+                //     context,
+                //     HomeScreen.id,
+                //     (route) => false,
+                //   );
+                
+              },
               child: const Text(
                 'Forgot password?',
                 style: TextStyle(
@@ -106,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: ElevatedButton(
                     onPressed: () {
                       BlocProvider.of<AuthenticationBloc>(context).add(
-                        SignUpUser(
+                        LoginUser(
                           emailController.text.trim(),
                           passwordController.text.trim(),
                         ),

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/bloc/authentication_bloc.dart';
 import 'package:myapp/firebase_options.dart';
 import 'package:myapp/screens/home_screen.dart';
+import 'package:myapp/screens/login_screen.dart';
 import 'package:myapp/screens/sign_up.dart';
 
 void main() async{
@@ -29,9 +30,9 @@ class MyAgent extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
       ),
-      initialRoute: SignupScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
-      SignupScreen.id: (context) => const SignupScreen(),
+      LoginScreen.id: (context) => const LoginScreen(),
       HomeScreen.id: (context) => const HomeScreen(),
       }
     ));    
