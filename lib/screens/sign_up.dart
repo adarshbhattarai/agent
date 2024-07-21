@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myapp/screens/forgot_password.dart';
 import 'package:myapp/screens/home_screen.dart';
 
 import '../bloc/authentication_bloc.dart';
@@ -23,10 +24,12 @@ class _SignupScreenState extends State<SignupScreen> {
   // Text Controllers
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final agentController = TextEditingController();
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
+    agentController.dispose();
     super.dispose();
   }
   @override
@@ -69,9 +72,24 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               obscureText: false,
             ),
+            const Text('Agent Name'),
+            TextFormField(
+              controller: agentController,
+              decoration: const InputDecoration(
+                prefixIcon: Icon(Icons.smart_toy_outlined, color: Colors.black),
+                border: OutlineInputBorder(),
+                hintText: 'Type your agent Name',
+              ),
+              obscureText: false,
+            ),
             const SizedBox(height: 10),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const  ForgotPasswordScreen()),
+                );
+              },
               child: const Text(
                 'Forgot password?',
                 style: TextStyle(
@@ -109,6 +127,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         SignUpUser(
                           emailController.text.trim(),
                           passwordController.text.trim(),
+                          agentController.text.trim(),
                         ),
                       );
                     },
@@ -131,7 +150,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 const Text("Already have an account? "),
                 GestureDetector(
                   onTap: () {
-                   
+                   Navigator.pop(context);
                   },
                   child: const Text(
                     'Login',

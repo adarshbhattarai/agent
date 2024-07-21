@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:myapp/bloc/authentication_bloc.dart';
 import 'package:myapp/firebase_options.dart';
+import 'package:myapp/screens/forgot_password.dart';
 import 'package:myapp/screens/home_screen.dart';
 import 'package:myapp/screens/login_screen.dart';
 import 'package:myapp/screens/sign_up.dart';
@@ -29,11 +30,13 @@ class MyAgent extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
         useMaterial3: true,
+        primarySwatch: Colors.blue,
       ),
       initialRoute: LoginScreen.id,
       routes: {
       LoginScreen.id: (context) => const LoginScreen(),
       HomeScreen.id: (context) => const HomeScreen(),
+      ForgotPasswordScreen.id: (context) => const ForgotPasswordScreen(),
       }
     ));    
   } 

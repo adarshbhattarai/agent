@@ -10,11 +10,12 @@ abstract class AuthenticationEvent {
 class SignUpUser extends AuthenticationEvent {
   final String email;
   final String password;
+  final String agentName;
 
-  const SignUpUser(this.email, this.password);
+  const SignUpUser(this.email, this.password, this.agentName);
 
   @override
-  List<Object> get props => [email, password];
+  List<Object> get props => [email, password, agentName];
 }
 
 
@@ -28,4 +29,6 @@ class LoginUser extends AuthenticationEvent {
   List<Object> get props => [email, password];
 }
 
-class SignOut extends AuthenticationEvent {}
+class SignOut extends AuthenticationEvent {
+  
+}

@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
+import 'package:myapp/datastore/user_repository.dart';
 import 'package:myapp/logger/log_printer.dart';
 
 import '../services/authentication.dart';
@@ -24,6 +26,7 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
           final UserModel? user =
           await authService.signUpUser(event.email, event.password);
       if (user != null) {
+        await UserRepository().storeUserDetails(user, event.agentName);
         emit(AuthenticationSuccessState(user));
         
       } else {
@@ -36,14 +39,15 @@ class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> 
     });
 
      on<SignOut>((event, emit) async {
-      emit(AuthenticationLoadingState(isLoading: true));
+      print("Siging out");
       try {
-        authService.signOutUser();
+        await authService.signOutUser();
+        emit(AuthenticationLoadingState(isLoading: false));
       } catch (e) {
         logger.i('error');
         logger.e(e.toString());
       } 
-       emit(AuthenticationLoadingState(isLoading: false));
+
      });
 
      on<LoginUser>((event, emit) async {
