@@ -1,7 +1,6 @@
-name: myapp
-description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
+name: e_thela_dental_bot
+description: "A bot where you communicate with dentist just by code number. Hey connect me to dentist Aastha, code is 0721. Simply get you too connected if you both 
+tell the same code. Can have group code for chiya guff. So EThela-ChiyaGuff"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
@@ -19,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.3.3 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -28,8 +27,21 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+
   flutter:
     sdk: flutter
+  english_words: ^4.0.0
+  flutter_localizations:
+    sdk: flutter
+  provider: ^6.1.2
+  camera: ^0.11.0
+  image: ^4.2.0
+  tflite_flutter: ^0.10.4
+  shared_preferences: ^2.3.1
+  get_it: ^7.7.0
+  http: ^1.2.2
+  icons_flutter: ^0.0.4
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -41,6 +53,7 @@ dependencies:
   bloc: ^8.1.4
   logger: ^2.3.0
   cloud_firestore: ^4.17.5
+  cloud_functions: ^4.7.6
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +76,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # Enable generation of localized Strings from arb files.
+  generate: true
+
+  assets:
+    # Add assets from the images directory to the application.
+    - assets/images/
+    - assets/images/background.jpg
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

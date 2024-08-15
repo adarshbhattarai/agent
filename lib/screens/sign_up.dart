@@ -1,10 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:myapp/screens/forgot_password.dart';
-import 'package:myapp/screens/home_screen.dart';
 
 import '../bloc/authentication_bloc.dart';
+import 'forgot_password.dart';
+import 'home_screen.dart';
 
 class SignupScreen extends StatefulWidget {
   static String id = 'sign_up_screen';

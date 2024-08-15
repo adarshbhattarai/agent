@@ -1,6 +1,7 @@
-import 'package:myapp/entity/MedicalDetailDTO.dart';
 
-import '../datastore/medical_detail_repository.dart'; // Import your repository
+
+import '../datastore/medical_detail_repository.dart';
+import '../entity/MedicalDetailDTO.dart'; // Import your repository
 
 class MedicalDetailService {
   final MedicalDetailRepository _repository;

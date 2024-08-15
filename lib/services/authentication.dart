@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
-import 'package:myapp/logger/log_printer.dart';
-import 'package:myapp/user/user.dart';
+
+import '../logger/log_printer.dart';
+import '../user/user.dart';
 
 
 class AuthService {

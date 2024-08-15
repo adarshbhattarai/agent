@@ -1,9 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
-import 'package:myapp/datastore/user_repository.dart';
-import 'package:myapp/logger/log_printer.dart';
 
+import '../datastore/user_repository.dart';
+import '../logger/log_printer.dart';
 import '../services/authentication.dart';
 import '../user/user.dart';
 

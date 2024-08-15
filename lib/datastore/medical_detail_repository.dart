@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:myapp/entity/MedicalDetailDTO.dart';
+
+import '../entity/MedicalDetailDTO.dart';
 
 class MedicalDetailRepository{
   final FirebaseFirestore _firestore;
@@ -50,24 +51,23 @@ class MedicalDetailRepository{
 
   }
 
-  Future<MedicalDetailDTO?> getUserDetail(String userId) async {
-    CollectionReference users = _firestore.collection('users');
 
+  Future<MedicalDetailDTO> getUserDetail(String userId) async {
     // Check if the document exists
-    DocumentSnapshot userDoc = await users.doc(userId).get();
+    DocumentSnapshot userDoc = await _firestore.collection('users').doc(userId).get();
 
-    Map<String, dynamic> data = userDoc.data as Map<String, dynamic>;
+    Map<String, dynamic> data = userDoc.data() as Map<String, dynamic>;
     Map<String, dynamic>? medicalData = data['medical'];
     MedicalDetailDTO medicalDetailDTO = MedicalDetailDTO(
         uid: medicalData?['uid'] ?? '',
-        name: medicalData?['name'],
-        age: medicalData?['age'],
-        hasDiabetes: medicalData?['hasDiabetes'],
-        smoker: medicalData?['smoker'],
-        location: medicalData?['location'],
-        gender:  medicalData?['gender'],
-        bloodType: medicalData?['bloodType']);
-
+        name: medicalData?['name'] ?? '',
+        age: medicalData?['age'] ?? 0,
+        hasDiabetes: medicalData?['hasDiabetes'] ?? false,
+        smoker: medicalData?['smoker'] ?? false,
+        location: medicalData?['location'] ?? 'None',
+        gender:  medicalData?['gender'] ?? 'Unk',
+        bloodType: medicalData?['bloodType'],
+        summary: medicalData?['summary']??'');
     return medicalDetailDTO;
   }
 }

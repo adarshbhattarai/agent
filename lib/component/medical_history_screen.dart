@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:myapp/services/MedicalDetailsService.dart';
 import 'package:provider/provider.dart';
 import '../constants/colors.dart';
 import '../entity/MedicalDetailDTO.dart';
+import '../services/MedicalDetailsService.dart';
 import '../util/custom_text_fields.dart';
 import  'package:firebase_auth/firebase_auth.dart' as auth;
 
@@ -41,6 +41,7 @@ class _MedicalHistoryScreenWidget extends State<MedicalHistoryScreen> {
     location: '',
     gender: 'Male',
     bloodType: 'A+',
+    summary: ''
   );
 
 
@@ -64,6 +65,7 @@ class _MedicalHistoryScreenWidget extends State<MedicalHistoryScreen> {
           location: _locationController.text,
           gender: _selectedGender,
           bloodType: _selectedBloodType,
+          summary: '',
         );
       });
       medicalDetailService.submit(medicalDetail);
